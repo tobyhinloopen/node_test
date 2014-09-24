@@ -1,24 +1,23 @@
-function tag(res, tagname, content, attrs) {
-  starttag(res, tagname, attrs);
-  if(content && (""+content).length > 0)
-    text(res, content);
-  endtag(res, tagname);
+function tag(tagname, content, attrs) {
+  return starttag(tagname, attrs)
+    + (content && (""+content).length > 0 && text(content) || "")
+    + endtag(tagname);
 }
 
-function starttag(res, tagname, attrs) {
-  res.write("<" + tagname + serializeAttributes(attrs) + ">");
+function starttag(tagname, attrs) {
+  return "<" + tagname + serializeAttributes(attrs) + ">";
 }
 
-function text(res, content) {
-  res.write(escapeHtmlEntities(content));
+function text(content) {
+  return escapeHtmlEntities(content);
 }
 
-function endtag(res, tagname) {
-  res.write("</" + tagname + ">");
+function endtag(tagname) {
+  return "</" + tagname + ">";
 }
 
-function doctype(res) {
-  res.write("<!DOCTYPE html>");
+function doctype() {
+  return "<!DOCTYPE html>";
 }
 
 function serializeAttributes(attrs) {

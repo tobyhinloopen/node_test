@@ -12,18 +12,15 @@ function jsontest(res) {
   res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
   fs.readFile("./data.json", function (err, datastr) {
     if(err) throw err;
-    var data = JSON.parse(datastr);
-    doctype(res);
-    tag(res, "title", "NodeJS JSON + I/O test");
-    style(res);
-    menu(res);
-    starttag(res, "br");
-    for(var x in data) {
-      tag(res, "code", x + ": " + data[x]);
-      starttag(res, "br");
-    }
-    footer(res, starttime);
-    res.end();
+    var data = JSON.parse(datastr), str = "", key;
+    for(key in data)
+      str += tag("code", key + ": " + data[key]) + starttag("br");
+    res.end(doctype()
+      + tag("title", "NodeJS JSON + I/O test")
+      + style()
+      + menu(res)
+      + str
+      + footer(starttime));
   });
 }
 

@@ -4,12 +4,12 @@ var html = require("./html"),
     endtag = html.endtag,
     text = html.text;
 
-function menu(res) {
-  starttag(res, "p");
-  tag(res, "a", "Home",      { href: "/" });
-  text(res, " ");
-  tag(res, "a", "JSON test", { href: "/jsontest" });
-  endtag(res, "p");
+function menu() {
+  return starttag("p")
+    + tag("a", "Home",      { href: "/" })
+    + text(" ")
+    + tag("a", "JSON test", { href: "/jsontest" })
+    + endtag("p");
 }
 
 module.exports = menu;
