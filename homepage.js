@@ -8,11 +8,13 @@ var menu = require("./menu"),
 function homepage(res) {
   var starttime = process.hrtime();
   res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
-  res.end(doctype()
-      + tag("title", "NodeJS Benchmarking")
-      + style()
-      + menu()
-      + footer(starttime));
+  var str = [];
+  str.push(doctype(),
+      tag("title", "NodeJS Benchmarking"),
+      style(),
+      menu(),
+      footer(starttime));
+  res.end(str.join(""));
 }
 
 module.exports = homepage;
