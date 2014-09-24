@@ -6,14 +6,16 @@ var menu = require("./menu"),
     tag = html.tag;
 
 function homepage(res) {
-  var starttime = process.hrtime();
+  var starttime = process.hrtime(),
+      buffstr = "",
+      buffres = { write: function(str) { buffstr += str; } };
   res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
-  doctype(res);
-  tag(res, "title", "NodeJS Benchmarking");
-  style(res);
-  menu(res);
-  footer(res, starttime);
-  res.end();
+  doctype(buffres);
+  tag(buffres, "title", "NodeJS Benchmarking");
+  style(buffres);
+  menu(buffres);
+  footer(buffres, starttime);
+  res.end(buffstr);
 }
 
 module.exports = homepage;
