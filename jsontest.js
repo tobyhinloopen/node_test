@@ -13,16 +13,16 @@ function jsontest(res) {
   var starttime = process.hrtime();
   res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
   if(cachedDatastr)
-    respondWithDataStr(res, cachedDatastr)
+    respondWithDataStr(res, cachedDatastr, starttime)
   else
     fs.readFile("./data.json", function (err, datastr) {
       if(err) throw err;
       cachedDatastr = datastr;
-      respondWithDataStr(res, datastr);
+      respondWithDataStr(res, datastr, starttime);
     });
 }
 
-function respondWithDataStr(res, datastr) {
+function respondWithDataStr(res, datastr, starttime) {
   var data = JSON.parse(datastr), str = [], key;
 
   str.push(doctype(),
