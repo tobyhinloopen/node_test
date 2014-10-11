@@ -2,10 +2,7 @@ var fs = require("fs"),
     menu = require("./menu"),
     footer = require("./footer"),
     style = require("./style"),
-    html = require("./html"),
-    doctype = html.doctype,
-    tag = html.tag,
-    starttag = html.starttag;
+    html = require("./html");
 
 var cachedDatastr = null;
 
@@ -23,19 +20,14 @@ function jsontest(res) {
 }
 
 function respondWithDataStr(res, datastr, starttime) {
-  var data = JSON.parse(datastr), str = [], key;
+  var data = JSON.parse(datastr), str = "", key;
 
-  str.push(doctype(),
-      tag("title", "NodeJS JSON + I/O test"),
-      style(),
-      menu(res));
+  str += html.doctype() + html.title("NodeJS JSON + I/O test") + style() + menu() + "<pre>";
 
   for(key in data)
-    str.push(tag("code", key + ": " + data[key]),
-        starttag("br"));
+    str += html.text(key + ": " + data[key] + "\n");
 
-  str.push(footer(starttime));
-  res.end(str.join(""));
+  res.end(str + "</pre>" + footer(starttime));
 }
 
 module.exports = jsontest;

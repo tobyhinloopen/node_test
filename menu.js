@@ -1,15 +1,10 @@
-var html = require("./html"),
-    tag = html.tag,
-    starttag = html.starttag,
-    endtag = html.endtag,
-    text = html.text;
+var html = require("./html");
 
 function menu() {
-  return starttag("p")
-    + tag("a", "Home",      { href: "/" })
-    + text(" ")
-    + tag("a", "JSON test", { href: "/jsontest" })
-    + endtag("p");
+  return html.starttag("p")
+    + html.linkto("Home", "/")
+    + " " + html.linkto("JSON test", "/jsontest")
+    + " " + html.linkto("Users", "/users");
 }
 
 module.exports = menu;

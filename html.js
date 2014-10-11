@@ -1,7 +1,15 @@
+function title(content, attrs) {
+  return tag("title", content, attrs);
+}
+
+function linkto(label, link, attrs) {
+  if(!attrs) attrs = {}
+  attrs.href = link
+  return tag("a", label, attrs);
+}
+
 function tag(tagname, content, attrs) {
-  return starttag(tagname, attrs)
-    + (content && (""+content).length > 0 && text(content) || "")
-    + endtag(tagname);
+  return starttag(tagname, attrs) + text(content) + endtag(tagname);
 }
 
 function starttag(tagname, attrs) {
@@ -9,7 +17,7 @@ function starttag(tagname, attrs) {
 }
 
 function text(content) {
-  return escapeHtmlEntities(content);
+  return content && (""+content).length > 0 && escapeHtmlEntities(""+content) || "";
 }
 
 function endtag(tagname) {
@@ -49,5 +57,7 @@ module.exports = {
   endtag: endtag,
   doctype: doctype,
   text: text,
-  escape: escapeHtmlEntities
+  escape: escapeHtmlEntities,
+  title: title,
+  linkto: linkto
 };
