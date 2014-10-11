@@ -1,0 +1,23 @@
+{
+  "name": "node_test",
+  "version": "0.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "mongodb": "^1.4.19"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tobyhinloopen/node_test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tobyhinloopen/node_test/issues"
+  },
+  "homepage": "https://github.com/tobyhinloopen/node_test"
+}
