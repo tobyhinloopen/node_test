@@ -1,13 +1,16 @@
 var html = require("./html");
 
 function form(resource, action, fn) {
-  formbuilder.resource = resource;
-  return html.starttag("form", { action: action, method: "post" })
-      + fn(formbuilder, resource) + "</form>";
+  var builder = new FormBuilder(resource);
+  return html.starttag("form", { action: action, method: "post" }) + fn(builder, resource)
+      + "</form>";
 }
 
-var formbuilder = {
-  resource: null,
+function FormBuilder(resource) {
+  this.resource = resource;
+}
+
+FormBuilder.prototype = {
   input: function(property, options) {
     options = options || {};
     return this.label(property, this.field(property, options.attrs));
@@ -25,7 +28,7 @@ var formbuilder = {
     return html.starttag("input", attrs);
   },
   submit: function() {
-    return html.starttag("input", { type: "submit" })
+    return html.starttag("input", { type: "submit" });
   }
 };
 

@@ -12,13 +12,13 @@ users.repository = null;
 users.index = function(res) {
   var starttime = process.hrtime();
   res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
-  res.write(html.doctype() + html.title("Users index") + style() + menu());
+  res.write(html.doctype() + html.title("Users index") + style() + menu("/users"));
 
   users.repository.findAll(function(collection) {
     var tableHtml = table(collection, function(t, user) {
       return t.item("name") + t.item("email", { as: mailto });
     });
-    res.end(tableHtml + html.linkto("New user", "/users/new") + footer(starttime));
+    res.end(tableHtml + html.linkto("New user", "/users/new", { class: "button" }) + footer(starttime));
   });
 };
 
@@ -30,7 +30,7 @@ users.new = function(res) {
     return f.input("name") + f.input("email") + f.submit();
   });
 
-  res.end(html.doctype() + html.title("Users - create") + style() + menu() + formhtml
+  res.end(html.doctype() + html.title("Users - create") + style() + menu("/users/new") + formhtml
       + footer(starttime));
 };
 

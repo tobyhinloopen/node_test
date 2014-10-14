@@ -22,7 +22,7 @@ function jsontest(res) {
 function respondWithDataStr(res, datastr, starttime) {
   var data = JSON.parse(datastr), str = "", key;
 
-  str += html.doctype() + html.title("NodeJS JSON + I/O test") + style() + menu() + "<pre>";
+  str += html.doctype() + html.title("NodeJS JSON + I/O test") + style() + menu("/jsontest") + "<pre>";
 
   for(key in data)
     str += html.text(key + ": " + data[key] + "\n");

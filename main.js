@@ -26,7 +26,7 @@ function startHttpServer(db, cb) {
     logReqRes(req, res);
     switch(req.url) {
       case "/_.css":
-        asset(res, "./style.css", "text/css");
+        asset(res, req, "./style.css", "text/css");
         break;
       case "/jsontest":
         jsontest(res);
